@@ -1,0 +1,52 @@
+'use strict';
+
+function uploadChunk(file, chunkNumber){
+    console.log('upload chunk #', chunkNumber);
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('Chunk uploaded - ', file.slice(chunkNumber, chunkNumber+1));
+            resolve(chunkNumber);
+        }, 100);
+    });
+}
+
+function getGenerator(file) {
+    var currentFile = file;
+    return function* (){
+        let chunkNumber = 0;
+        let chunksCount = currentFile.length / chunkSize;
+        while (chunkNumber < chunksCount){
+            yield uploadChunk(currentFile, chunkNumber);
+            chunkNumber++;
+        }
+    }
+}
+
+function uploadChunks(generator){
+    let next = generator.next();
+    if (!next.done){
+        next.value.then(
+            result => uploadChunks(generator), //upload next chunk,
+            err => generator.throw(err) //?
+        );
+    } else {
+        console.log(next.value);
+    }
+}
+function uploadFile(file) {
+    let generator = getGenerator(file)();
+    uploadChunks(generator);
+}
+
+
+var files = [
+    'abcdefghijklmnopqrstuvwxyz',
+    'zyxwvutsrqponmlkjihgfedcba'
+];
+var chunkSize = 1;
+uploadFile(files[0]);
+
+
+function uploadFiles(){
+
+}
