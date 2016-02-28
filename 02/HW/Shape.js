@@ -17,22 +17,22 @@ class Shape {
     constructor(type){
         this._type = type;
     }
-    getPerimeter() {
+    get perimeter() {
         return 0;
     }
 
-    getArea() {
+    get area() {
         return 0;
     }
 
     printPerimeter(units) {
         units = units || 'mm';
-        console.log(`${this._type} perimiter in ${units}: ${Shape.formatPerimeter(this.getPerimeter(), units)}`);
+        console.log(`${this._type} perimiter in ${units}: ${Shape.formatPerimeter(this.perimeter, units)}`);
     }
 
     printArea(units) {
         units = units || 'mm';
-        let area = Shape.formatArea(this.getArea(), units);
+        let area = Shape.formatArea(this.area, units);
         console.log(`${this._type} area in ${units}: ${area}`);
     }
 
@@ -73,10 +73,10 @@ class Rectangle extends Shape {
         this.width = a;
         this.height = b;
     }
-    getPerimeter() {
+    get perimeter() {
         return (this.width + this.height)*2;
     }
-    getArea() {
+    get area() {
         return this.width * this.height;
     }
 }
@@ -86,23 +86,24 @@ class Circle extends Shape {
         super('Circle');
         this.r = r;
     }
-    getPerimeter() {
+    get perimeter() {
         return 2*Math.PI*this.r;
     }
-    getArea() {
+    get area() {
         return Math.PI*Math.pow(this.r, 2);
     }
 }
+
 class Triangle extends Shape {
     constructor(a, b, c) {
         super('Triangle');
         this.sides = [a, b, c];
     }
-    getPerimeter() {
+    get perimeter() {
         return this.sides.reduce(function(sum, item){return sum+item},0);
     }
-    getArea() {
-        let s = this.getPerimeter()/2;
+    get area() {
+        let s = this.perimeter/2;
         return Math.sqrt(this.sides.reduce(function(v, item){ return (s-item)*v},s));
     }
 }
@@ -114,11 +115,11 @@ class Trapezoid extends Shape {
         this.b2 = b2;
         this.h = h;
     }
-    getPerimeter() {
+    get perimeter () {
         return this.b1 + this.b2 + this.h;
     }
 
-    getArea() {
+    get area () {
         return this.h *(this.b1 + this.b2)/2;
     }
 }

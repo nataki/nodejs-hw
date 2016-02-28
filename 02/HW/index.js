@@ -5,8 +5,8 @@ var shapes = require('./Shape');
 
 console.log("--- RECTANGLE TEST ---");
 var rect = new shapes.Rectangle(100, 50);
-console.log(rect.getArea());
-console.log(rect.getPerimeter());
+console.log(rect.area);
+console.log(rect.perimeter);
 
 rect.printArea('m');
 rect.printArea('cm');
@@ -24,7 +24,7 @@ circle.printArea();
 circle.printPerimeter('cm');
 circle.printPerimeter();
 
-console.log("--- trapezoid TEST ---");
+console.log("--- TRIANGLE TEST ---");
 var triangle = new shapes.Triangle(10, 30,30);
 
 triangle.printArea('cm');
