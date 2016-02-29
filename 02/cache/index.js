@@ -8,10 +8,11 @@
  Required methods: - set(key, value) - get(key) - has(key) - remove([key])
 
  */
-var cache = require(Cache);
+var Cache = require('./Cache'),
+    cache = new Cache();
 
-cache.set('stringKey', '123456789');
-cache.set('objectKey', {
+cache.setValue('stringKey', '123456789');
+cache.setValue('objectKey', {
     name: 'name1',
     address: {
         key1: 123
@@ -19,14 +20,14 @@ cache.set('objectKey', {
 });
 
 console.log(cache.has('stringKey'));
-console.log(cache.get('stringKey'));
+console.log(cache.getValue('stringKey'));
 
 console.log(cache.has('objectKey'));
-console.log(cache.get('objectKey'));
+console.log(cache.getValue('objectKey'));
 
-console.log(cache.remove('stringKey'));
+cache.remove('stringKey');
 console.log(cache.has('stringKey'));
 
-console.log(cache.set('stringKey', '0000000'));
+cache.setValue('stringKey', '0000000');
 console.log(cache.has('stringKey'));
-console.log(cache.get('stringKey'));
+console.log(cache.getValue('stringKey'));

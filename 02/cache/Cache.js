@@ -1,18 +1,23 @@
 /**
  * Created by Nataliia.Akimova on 2/29/2016.
  */
+'use strict';
+
 class Cache {
-    set(key, value){
-
+    constructor(){
+        this.storage = {};
     }
-    get(key){
-
+    setValue(key, value){
+        this.storage[key] = value;
+    }
+    getValue(key){
+        return this.storage[key];
     }
     has(key){
-
+        return !!this.storage[key];
     }
     remove(key){
-
+        delete this.storage[key];
     }
 }
 
